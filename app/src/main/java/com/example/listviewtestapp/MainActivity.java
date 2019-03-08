@@ -218,24 +218,24 @@ public class MainActivity extends AppCompatActivity {
                     }
                     //Log.i("some item", "[1]onFocusChange: get focus");
                     vs.lastEt1Focus = viewHolder.position;
-                    vs.lastEt2Focus = -1;
+                    //vs.lastEt2Focus = -1;
                     viewHolder.et1.post(viewHolder.et1::selectAll);
                     //listView.post(() -> listView.scrollTo(viewHolder.position));
-                    /*if (viewHolder.position > 0) {
+                    if (viewHolder.position > 0) {
                         listView.post(() -> listView.smoothScrollToPosition(viewHolder.position + 1));
-                    }*/
+                    }
                     /*if (viewHolder.position > 0) {
                         listView.setSelection(viewHolder.position - 1);
                     }*/
-                    if (viewHolder.position > 0) {
+                    /*if (viewHolder.position > 0) {
                         //mScrollView.scrollTo(0, viewHolder.et1.getBottom());
                         mScrollView.post(() -> mScrollView.scrollTo(0, viewHolder.et1.getBottom()));
-                    }
+                    }*/
                     //viewHolder.et1.post(() -> viewHolder.et1.getParent().requestChildFocus(viewHolder.et1, viewHolder.et1));
                 }
-                /*if (!hasFocus) {
-                    viewHolder.lastEt1Focus = -1;
-                }*/
+                if (!hasFocus) {
+                    vs.lastEt1Focus = -1;
+                }
             };
         }
 
@@ -249,13 +249,16 @@ public class MainActivity extends AppCompatActivity {
                     //Log.i("some item", "[2]onFocusChange: get focus");
                     mLastEtPosition = viewHolder.position;
                     vs.lastEt2Focus = viewHolder.position;
-                    vs.lastEt1Focus = -1;
+                    //vs.lastEt1Focus = -1;
                     viewHolder.et2.post(viewHolder.et2::selectAll);
-                    if (viewHolder.position > 0) {
+                    /*if (viewHolder.position > 0) {
                         //mScrollView.scrollTo(0, viewHolder.et2.getBottom());
                         mScrollView.post(() -> mScrollView.scrollTo(0, viewHolder.et2.getBottom()));
-                    }
+                    }*/
                     //viewHolder.et2.post(() -> viewHolder.et2.getParent().requestChildFocus(viewHolder.et2, viewHolder.et2));
+                }
+                if (!hasFocus) {
+                    vs.lastEt2Focus = -1;
                 }
             };
         }

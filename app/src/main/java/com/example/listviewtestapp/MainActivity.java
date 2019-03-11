@@ -11,7 +11,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.Selection;
-import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.SparseArray;
@@ -19,7 +18,6 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -160,11 +158,9 @@ public class MainActivity extends AppCompatActivity {
                         mViewsStates.append(position, vs);
                     }
                     if (vh.position == oldVs.lastEt1Focus) {
-                        //vh.et1.post(vh.et1::clearFocus);
                         vh.et1.clearFocus();
                     }
                     if (vh.position == oldVs.lastEt2Focus) {
-                        //vh.et2.post(vh.et2::clearFocus);
                         vh.et2.clearFocus();
                     }
                     if (vs.expanded && vh.content.getVisibility() != View.VISIBLE) {
@@ -172,11 +168,9 @@ public class MainActivity extends AppCompatActivity {
                         toggleExpandableMenu(true, vh);
                     }
                     if (vs.lastEt1Focus != -1) {
-                        //vh.et1.post(vh.et1::requestFocus);
                         vh.et1.requestFocus();
                     }
                     if (vs.lastEt2Focus != -1) {
-                        //vh.et2.post(vh.et2::requestFocus);
                         vh.et2.requestFocus();
                     }
                     if (!vs.expanded && vh.content.getVisibility() == View.VISIBLE) {
@@ -184,11 +178,9 @@ public class MainActivity extends AppCompatActivity {
                         toggleExpandableMenu(false, vh);
                     }
                     if (vs.lastEt1Focus == -1) {
-                        //vh.et1.post(vh.et1::clearFocus);
                         vh.et1.clearFocus();
                     }
                     if (vs.lastEt2Focus == -1) {
-                        //vh.et2.post(vh.et2::clearFocus);
                         vh.et2.clearFocus();
                     }
                 }
@@ -207,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
 
         View.OnFocusChangeListener create1FocusLsnr(final ViewHolder viewHolder, ListView listView) {
             return (v, hasFocus) -> {
-                //Log.i("some item", String.format("[1]onFocusChange: has focus: %b, position: %d", hasFocus, viewHolder.position));
+                Log.i("some item", String.format("[1]onFocusChange: has focus: %b, position: %d", hasFocus, viewHolder.position));
                 ViewState vs = mViewsStates.get(viewHolder.position);
                 if (hasFocus && vs.lastEt1Focus == -1) {
                     if (viewHolder.position > 0 && mLastEtPosition == viewHolder.position - 1) {
@@ -218,9 +210,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     //Log.i("some item", "[1]onFocusChange: get focus");
                     vs.lastEt1Focus = viewHolder.position;
-                    //vs.lastEt2Focus = -1;
                     viewHolder.et1.post(viewHolder.et1::selectAll);
-                    //listView.post(() -> listView.scrollTo(viewHolder.position));
                     if (viewHolder.position > 0) {
                         listView.post(() -> listView.smoothScrollToPosition(viewHolder.position + 1));
                     }
@@ -241,15 +231,11 @@ public class MainActivity extends AppCompatActivity {
 
         View.OnFocusChangeListener create2FocusLsnr(final ViewHolder viewHolder) {
             return (v, hasFocus) -> {
-                //Log.i("some item", String.format("[2]onFocusChange: has focus: %b, position: %d", hasFocus, viewHolder.position));
+                Log.i("some item", String.format("[2]onFocusChange: has focus: %b, position: %d", hasFocus, viewHolder.position));
                 ViewState vs = mViewsStates.get(viewHolder.position);
                 if (hasFocus && vs.lastEt2Focus == -1) {
-                    //Editable text = viewHolder.et2.getText();
-                    //Selection.selectAll(text);
-                    //Log.i("some item", "[2]onFocusChange: get focus");
                     mLastEtPosition = viewHolder.position;
                     vs.lastEt2Focus = viewHolder.position;
-                    //vs.lastEt1Focus = -1;
                     viewHolder.et2.post(viewHolder.et2::selectAll);
                     /*if (viewHolder.position > 0) {
                         //mScrollView.scrollTo(0, viewHolder.et2.getBottom());
